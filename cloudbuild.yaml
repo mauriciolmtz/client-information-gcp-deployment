@@ -1,11 +1,9 @@
 steps:
-  # Step 1: Install dependencies
   - name: 'node:22'
     entrypoint: 'npm'
     args: ['install']
     id: 'install-dependencies'
 
-  # Step 2: Run Sequelize migrations with DATABASE_URL from Secret Manager
   - name: 'node:22'
     entrypoint: 'bash'
     args:
@@ -20,7 +18,6 @@ steps:
     env:
       - 'NODE_ENV=production'
 
-  # Step 3: Deploy to Google App Engine
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy', '--quiet']
     id: 'deploy-app-engine'
